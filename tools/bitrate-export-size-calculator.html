@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitrate &amp; Export Size Calculator | CapCut Guide</title>
+<meta name="description" content="Free video bitrate and export size calculator. Work out how big your exported video will be, or the bitrate you need for a target file size.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#0b0f14;color:#e6edf3;line-height:1.6}
+a{color:#00e5ff}header{background:#0d1117;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1f2937}
+.logo{color:#fff;font-weight:800;font-size:20px;text-decoration:none}.logo b{color:#00e5ff}nav a{color:#c9d1d9;margin:0 8px;text-decoration:none;font-size:14px}
+nav a:hover{color:#00e5ff}.wrap{max-width:1080px;margin:0 auto;padding:16px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:18px}
+.toolcard{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:16px;text-decoration:none;color:#e6edf3;display:block}
+.toolcard:hover{border-color:#00e5ff}.toolcard h3{margin:0 0 6px;color:#fff}.toolcard p{margin:0;font-size:14px;color:#9aa7b4}
+.acard{background:#161b22;border:1px solid #2a3340;border-radius:14px;overflow:hidden;text-decoration:none;color:#e6edf3;display:block}
+.acard:hover{border-color:#00e5ff}.acard img{width:100%;height:150px;object-fit:cover;display:block}.acard span{display:block;padding:12px 14px;font-weight:600;font-size:15px;color:#fff}
+.acard small{display:block;padding:0 14px 12px;color:#9aa7b4;font-size:13px;line-height:1.45}
+input,select,textarea{padding:10px;border-radius:8px;border:1px solid #3a4556;font-size:15px;margin:6px 4px 6px 0;background:#0d1117;color:#e6edf3;width:100%;max-width:420px}
+button{background:#00e5ff;color:#04222a;border:0;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin:4px 4px 4px 0}
+button.ghost{background:transparent;color:#00e5ff;border:1px solid #00e5ff}
+.result{background:#0d1117;border:1px solid #2a3340;border-radius:10px;padding:14px;margin:12px 0}
+.result b{color:#00e5ff}main.article{max-width:760px;margin:0 auto;padding:20px}.article img.hero{width:100%;height:auto;border-radius:14px}
+.lede{font-size:18px;color:#b6c2cf}footer{padding:26px 20px;text-align:center;color:#8b98a5;font-size:13px;border-top:1px solid #1f2937;margin-top:30px}
+footer a{margin:0 6px}.note{background:#1a1408;border:1px solid #8a6d1a;border-radius:10px;padding:12px;font-size:14px;color:#f5d67b}
+h2{color:#fff;margin-top:28px}.article h2{color:#fff}.article h3{color:#dbe4ee}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #2a3340;padding:8px 10px;text-align:left;font-size:14px}th{background:#161b22;color:#fff}
+.badge{display:inline-block;background:#161b22;border:1px solid #2a3340;border-radius:999px;padding:4px 12px;font-size:13px;color:#9aa7b4;margin:2px}
+</style></head>
+<body><header><a class="logo" href="../index.html">CapCut<b>Guide</b></a><nav><a href="../index.html">Home</a><a href="../index.html#articles">Guides</a><a href="../index.html#tools">Tools</a><a href="../about.html">About</a></nav></header>
+<main class="wrap"><p><a href="../index.html">Home</a> / <a href="../index.html#tools">Tools</a></p>
+<h1>Bitrate &amp; Export Size Calculator</h1>
+<p class="lede">File size = bitrate × duration. Work out how big your export will be, or what bitrate fits a target file size.</p>
+<div class="card"><h2 style="margin-top:0">File size from bitrate</h2>
+<p><label>Video length (minutes) <input id="mins" type="number" value="1" min="0.1" step="0.1" style="max-width:140px"></label>
+<label>Video bitrate (Mbps) <input id="br" type="number" value="20" min="0.1" step="0.5" style="max-width:140px"></label>
+<label>Audio bitrate (kbps) <input id="abr" type="number" value="192" min="32" step="16" style="max-width:140px"></label></p>
+<p><label>Quality preset <select id="preset"><option value="">Custom</option><option value="8">1080p social (8 Mbps)</option><option value="12">1080p high (12 Mbps)</option><option value="20" selected>1080p very high (20 Mbps)</option><option value="45">4K standard (45 Mbps)</option><option value="80">4K high (80 Mbps)</option></select></label></p>
+<p><button onclick="calcSize()">Calculate file size</button></p>
+<div class="result" id="sizeOut"></div>
+<h2>Bitrate from target size</h2>
+<p><label>Target file size (MB) <input id="targetMB" type="number" value="100" min="1" style="max-width:140px"></label>
+<label>Video length (minutes) <input id="mins2" type="number" value="1" min="0.1" step="0.1" style="max-width:140px"></label></p>
+<p><button onclick="calcBitrate()">Calculate max bitrate</button></p>
+<div class="result" id="brOut"></div>
+<script>
+function fmtMB(mb){if(mb>=1024)return (mb/1024).toFixed(2)+' GB ('+Math.round(mb).toLocaleString()+' MB)';return mb.toFixed(1)+' MB'}
+function calcSize(){const m=+document.getElementById('mins').value,br=+document.getElementById('br').value,ab=+document.getElementById('abr').value;
+if(!m||!br)return;const secs=m*60,totalMbps=br+ab/1000,mb=totalMbps*secs/8;
+document.getElementById('sizeOut').innerHTML='Estimated file size: <b>'+fmtMB(mb)+'</b><br>Video stream: '+br+' Mbps + audio '+ab+' kbps = '+totalMbps.toFixed(2)+' Mbps total<br>Per minute of video: <b>'+fmtMB(totalMbps*60/8)+'</b>'}
+function calcBitrate(){const mb=+document.getElementById('targetMB').value,m=+document.getElementById('mins2').value;
+if(!mb||!m)return;const secs=m*60,totalMbps=mb*8/secs,videoMbps=Math.max(0,totalMbps-0.192);
+document.getElementById('brOut').innerHTML='Maximum total bitrate: <b>'+totalMbps.toFixed(2)+' Mbps</b><br>Video bitrate (after ~192 kbps audio): <b>'+videoMbps.toFixed(2)+' Mbps</b><br>'+(videoMbps>=20?'Great for 1080p, even 4K short clips.':videoMbps>=10?'Good for 1080p social uploads.':videoMbps>=5?'Usable for 1080p, expect some softness in busy scenes.':'Low — consider a shorter video or a larger target size.')}
+document.getElementById('preset').addEventListener('change',e=>{if(e.target.value){document.getElementById('br').value=e.target.value;calcSize()}});
+calcSize();calcBitrate();
+</script></div>
+<h2>What bitrate should you use?</h2>
+<table><tr><th>Use case</th><th>Resolution</th><th>Suggested bitrate</th></tr>
+<tr><td>TikTok / Reels (vertical)</td><td>1080 × 1920</td><td>12–20 Mbps</td></tr>
+<tr><td>YouTube 1080p</td><td>1920 × 1080</td><td>12–20 Mbps</td></tr>
+<tr><td>YouTube 4K</td><td>3840 × 2160</td><td>45–80 Mbps</td></tr>
+<tr><td>Quick share / WhatsApp</td><td>720p</td><td>5–8 Mbps</td></tr></table>
+<p>Bitrate is the amount of data per second of video. Higher bitrate means more detail and less blockiness in fast movement, but also a bigger file and slower upload. Platforms re-compress your video anyway, so exporting far above their recommended bitrate mostly wastes storage. A good rule: 12–20 Mbps for 1080p social video, 45 Mbps for 4K. If your export looks blocky, raise the bitrate before raising the resolution.</p>
+<h2>More tools</h2><div class="grid"><a class="toolcard" href="aspect-ratio-calculator.html"><h3>Aspect Ratio Calculator</h3><p>Presets for TikTok, Reels, Shorts and YouTube. Enter one side and get the matching resolution instantly.</p></a><a class="toolcard" href="caption-timing-helper.html"><h3>Caption Timing Helper</h3><p>Paste your script and split it into timed caption lines with start and end timestamps, ready to use.</p></a><a class="toolcard" href="template-idea-generator.html"><h3>Template Idea Generator</h3><p>Pick a niche and a mood and get a complete edit idea: hook, style, transitions and music vibe.</p></a></div>
+</main><footer><p>Download CapCut: <a href="https://play.google.com/store/apps/details/CapCut_Video_Editor?id=com.lemon.lvoverseas&hl=en_GB" target="_blank" rel="noopener">Get it on Google Play</a> | <a href="https://apps.apple.com/pk/app/capcut-photo-video-editor/id1500855883" target="_blank" rel="noopener">Download on the App Store</a></p><p><a href="../about.html">About</a> | <a href="../contact.html">Contact</a> | <a href="../privacy.html">Privacy</a> | <a href="../disclaimer.html">Disclaimer</a></p><p>CapCut Guide — independent informational guides about the CapCut video editor. Not affiliated with ByteDance or CapCut.</p></footer></body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Template Idea Generator — CapCut Edit Ideas | CapCut Guide</title>
+<meta name="description" content="Free CapCut template idea generator. Pick a niche and a mood and get a complete edit idea with a hook, style, transitions and music vibe.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#0b0f14;color:#e6edf3;line-height:1.6}
+a{color:#00e5ff}header{background:#0d1117;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1f2937}
+.logo{color:#fff;font-weight:800;font-size:20px;text-decoration:none}.logo b{color:#00e5ff}nav a{color:#c9d1d9;margin:0 8px;text-decoration:none;font-size:14px}
+nav a:hover{color:#00e5ff}.wrap{max-width:1080px;margin:0 auto;padding:16px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:18px}
+.toolcard{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:16px;text-decoration:none;color:#e6edf3;display:block}
+.toolcard:hover{border-color:#00e5ff}.toolcard h3{margin:0 0 6px;color:#fff}.toolcard p{margin:0;font-size:14px;color:#9aa7b4}
+.acard{background:#161b22;border:1px solid #2a3340;border-radius:14px;overflow:hidden;text-decoration:none;color:#e6edf3;display:block}
+.acard:hover{border-color:#00e5ff}.acard img{width:100%;height:150px;object-fit:cover;display:block}.acard span{display:block;padding:12px 14px;font-weight:600;font-size:15px;color:#fff}
+.acard small{display:block;padding:0 14px 12px;color:#9aa7b4;font-size:13px;line-height:1.45}
+input,select,textarea{padding:10px;border-radius:8px;border:1px solid #3a4556;font-size:15px;margin:6px 4px 6px 0;background:#0d1117;color:#e6edf3;width:100%;max-width:420px}
+button{background:#00e5ff;color:#04222a;border:0;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin:4px 4px 4px 0}
+button.ghost{background:transparent;color:#00e5ff;border:1px solid #00e5ff}
+.result{background:#0d1117;border:1px solid #2a3340;border-radius:10px;padding:14px;margin:12px 0}
+.result b{color:#00e5ff}main.article{max-width:760px;margin:0 auto;padding:20px}.article img.hero{width:100%;height:auto;border-radius:14px}
+.lede{font-size:18px;color:#b6c2cf}footer{padding:26px 20px;text-align:center;color:#8b98a5;font-size:13px;border-top:1px solid #1f2937;margin-top:30px}
+footer a{margin:0 6px}.note{background:#1a1408;border:1px solid #8a6d1a;border-radius:10px;padding:12px;font-size:14px;color:#f5d67b}
+h2{color:#fff;margin-top:28px}.article h2{color:#fff}.article h3{color:#dbe4ee}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #2a3340;padding:8px 10px;text-align:left;font-size:14px}th{background:#161b22;color:#fff}
+.badge{display:inline-block;background:#161b22;border:1px solid #2a3340;border-radius:999px;padding:4px 12px;font-size:13px;color:#9aa7b4;margin:2px}
+.idea h3{color:#00e5ff;margin-bottom:4px}.idea p{margin:4px 0}
+</style></head>
+<body><header><a class="logo" href="../index.html">CapCut<b>Guide</b></a><nav><a href="../index.html">Home</a><a href="../index.html#articles">Guides</a><a href="../index.html#tools">Tools</a><a href="../about.html">About</a></nav></header>
+<main class="wrap"><p><a href="../index.html">Home</a> / <a href="../index.html#tools">Tools</a></p>
+<h1>Template Idea Generator</h1>
+<p class="lede">Stuck for an edit idea? Pick your niche and a mood, and get a complete video concept you can build in CapCut.</p>
+<div class="card"><h2 style="margin-top:0">Generate an edit idea</h2>
+<p><label>Niche <select id="niche"><option>Travel</option><option>Food</option><option>Fitness</option><option>Fashion</option><option>Gaming</option><option>Daily vlog</option><option>Product showcase</option><option>Comedy skit</option></select></label>
+<label>Mood <select id="mood"><option>Energetic</option><option>Cinematic</option><option>Chill</option><option>Funny</option><option>Dramatic</option></select></label>
+<label>Length <select id="len"><option>15 seconds</option><option>30 seconds</option><option>60 seconds</option></select></label></p>
+<p><button onclick="generate()">Generate idea</button> <button class="ghost" onclick="copyIdea()">Copy idea</button></p>
+<div class="result idea" id="ideaOut"></div>
+<script>
+const hooks={
+Travel:['Nobody tells you this about {place}…','3 places in {place} that feel unreal','POV: you finally visit {place}','We spent 24 hours in {place} — here is what happened'],
+Food:['The 30-second recipe that broke my group chat','Rating street food until I find a 10/10','This dish looks fancy. It takes 5 minutes.','I tried the viral {dish} so you do not have to'],
+Fitness:['Day 1 vs Day 90 — same workout, different person','Stop doing this exercise wrong','The 10-minute routine I actually stick to','POV: your trainer films your form'],
+Fashion:['3 outfits, 1 jacket — which wins?','Thrift flip: turning Rs. 500 into a fit','Get ready with me in 60 seconds','The outfit everyone keeps asking about'],
+Gaming:['The clutch nobody believed','Ranking every weapon in 60 seconds','POV: you are the last player alive','This trick works in every match'],
+'Daily vlog':['A quiet morning, filmed properly','What a normal Tuesday actually looks like','Come with me to run errands (cinematic version)','My morning routine, but honest'],
+'Product showcase':['This product surprised me','Unboxing the thing everyone is talking about','Before vs after — the difference is real','5 reasons this is worth it (and 1 reason it is not)'],
+'Comedy skit':['Nobody: … Me at 3am:','When the Wi-Fi dies mid-game','Types of people in every group chat','Expectation vs reality, phone edition']};
+const styles={Energetic:['Fast cuts on every beat, zoom punches on highlights, bold kinetic captions.','Quick 0.5-second clips, flash transitions, speed ramps on action shots.'],Cinematic:['Slow push-ins, letterbox bars, teal-and-orange grade, minimal text.','Long takes, smooth gimbal-style movement, film grain overlay.'],Chill:['Soft fades, gentle slow motion, lo-fi colour grade, small lowercase captions.','Slow zooms, warm tones, natural sound kept under the music.'],Funny:['Freeze frames with captions, zoom-in reaction shots, cartoon sound effects.','Jump cuts on every punchline, meme-style text pops, record-scratch stops.'],Dramatic:['Black-and-white intro, sudden colour reveal, deep bass drop on the twist.','Slow motion on the key moment, vignette, bold single-word captions.']};
+const trans=['Zoom in / zoom out on the beat','Glitch on the scene change','Whip pan between locations','Mask transition through a doorway','Flash cut on the music drop','Smooth slide with motion blur'];
+const music={Energetic:'Upbeat electronic or phonk with a strong drop',Cinematic:'Slow orchestral or ambient piano',Chill:'Lo-fi beats or soft acoustic',Funny:'Playful pizzicato or a trending comedy sound',Dramatic:'Deep trailer-style percussion with a riser'};
+const caps={Energetic:'Bold all-caps with word-by-word pop',Cinematic:'Thin elegant font, lower third, no animation',Chill:'Small lowercase, soft fade-in',Funny:'Chunky font with bounce and emoji-free reaction words',Dramatic:'Single huge words, one per screen'};
+const places=['the mountains','the old city','the beach at sunrise','a night market','a hidden waterfall'];
+const dishes=['crispy chicken sandwich','one-pot pasta','loaded fries'];
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function generate(){const niche=document.getElementById('niche').value,mood=document.getElementById('mood').value,len=document.getElementById('len').value;
+let hook=pick(hooks[niche]);hook=hook.replace('{place}',pick(places)).replace('{dish}',pick(dishes));
+const idea={niche:niche,mood:mood,len:len,hook:hook,style:pick(styles[mood]),transition:pick(trans),music:music[mood],caption:caps[mood]};
+document.getElementById('ideaOut').innerHTML='<h3>'+idea.hook+'</h3><p><b>Niche:</b> '+idea.niche+' &nbsp; <b>Mood:</b> '+idea.mood+' &nbsp; <b>Length:</b> '+idea.len+'</p><p><b>Hook:</b> '+idea.hook+'</p><p><b>Edit style:</b> '+idea.style+'</p><p><b>Key transition:</b> '+idea.transition+'</p><p><b>Music vibe:</b> '+idea.music+'</p><p><b>Caption style:</b> '+idea.caption+'</p>';
+document.getElementById('ideaOut').dataset.text='Hook: '+idea.hook+' | Niche: '+idea.niche+' | Mood: '+idea.mood+' | Length: '+idea.len+' | Style: '+idea.style+' | Transition: '+idea.transition+' | Music: '+idea.music+' | Captions: '+idea.caption}
+function copyIdea(){const t=document.getElementById('ideaOut').dataset.text;if(!t)return;navigator.clipboard.writeText(t).then(()=>{const b=event.target;b.textContent='Copied!';setTimeout(()=>b.textContent='Copy idea',1200)})}
+generate();
+</script></div>
+<h2>How to turn an idea into a finished video</h2><p>An idea is only the start — the edit is where it becomes a video. Shoot or collect your clips first, then open CapCut and set the right canvas size (9:16 for TikTok and Reels). Place your hook clip first: the first two seconds decide whether someone keeps watching. Cut on the beat of your music, add captions in the style the idea suggests, and use one signature transition instead of a different effect on every cut. Export at 1080p, 30fps, 12–20 Mbps for social platforms. If the idea came from this generator, make it your own: change the hook line, swap the music, and film with your own clips — templates are a starting point, not a finished video.</p>
+<h2>More tools</h2><div class="grid"><a class="toolcard" href="aspect-ratio-calculator.html"><h3>Aspect Ratio Calculator</h3><p>Presets for TikTok, Reels, Shorts and YouTube. Enter one side and get the matching resolution instantly.</p></a><a class="toolcard" href="bitrate-export-size-calculator.html"><h3>Bitrate &amp; Export Size Calculator</h3><p>Work out how big your exported video will be from its length and bitrate — or the bitrate for a target size.</p></a><a class="toolcard" href="caption-timing-helper.html"><h3>Caption Timing Helper</h3><p>Paste your script and split it into timed caption lines with start and end timestamps, ready to use.</p></a></div>
+</main><footer><p>Download CapCut: <a href="https://play.google.com/store/apps/details/CapCut_Video_Editor?id=com.lemon.lvoverseas&hl=en_GB" target="_blank" rel="noopener">Get it on Google Play</a> | <a href="https://apps.apple.com/pk/app/capcut-photo-video-editor/id1500855883" target="_blank" rel="noopener">Download on the App Store</a></p><p><a href="../about.html">About</a> | <a href="../contact.html">Contact</a> | <a href="../privacy.html">Privacy</a> | <a href="../disclaimer.html">Disclaimer</a></p><p>CapCut Guide — independent informational guides about the CapCut video editor. Not affiliated with ByteDance or CapCut.</p></footer></body></html>

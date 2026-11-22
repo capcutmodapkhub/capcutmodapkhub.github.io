@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caption Timing Helper — Split Scripts into Timed Captions | CapCut Guide</title>
+<meta name="description" content="Free caption timing helper. Paste your script, choose words per caption and speaking speed, and get timed caption lines with start and end timestamps.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#0b0f14;color:#e6edf3;line-height:1.6}
+a{color:#00e5ff}header{background:#0d1117;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1f2937}
+.logo{color:#fff;font-weight:800;font-size:20px;text-decoration:none}.logo b{color:#00e5ff}nav a{color:#c9d1d9;margin:0 8px;text-decoration:none;font-size:14px}
+nav a:hover{color:#00e5ff}.wrap{max-width:1080px;margin:0 auto;padding:16px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:18px}
+.toolcard{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:16px;text-decoration:none;color:#e6edf3;display:block}
+.toolcard:hover{border-color:#00e5ff}.toolcard h3{margin:0 0 6px;color:#fff}.toolcard p{margin:0;font-size:14px;color:#9aa7b4}
+.acard{background:#161b22;border:1px solid #2a3340;border-radius:14px;overflow:hidden;text-decoration:none;color:#e6edf3;display:block}
+.acard:hover{border-color:#00e5ff}.acard img{width:100%;height:150px;object-fit:cover;display:block}.acard span{display:block;padding:12px 14px;font-weight:600;font-size:15px;color:#fff}
+.acard small{display:block;padding:0 14px 12px;color:#9aa7b4;font-size:13px;line-height:1.45}
+input,select,textarea{padding:10px;border-radius:8px;border:1px solid #3a4556;font-size:15px;margin:6px 4px 6px 0;background:#0d1117;color:#e6edf3;width:100%;max-width:420px}
+textarea{min-height:140px}button{background:#00e5ff;color:#04222a;border:0;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin:4px 4px 4px 0}
+button.ghost{background:transparent;color:#00e5ff;border:1px solid #00e5ff}
+.result{background:#0d1117;border:1px solid #2a3340;border-radius:10px;padding:14px;margin:12px 0}
+.result b{color:#00e5ff}main.article{max-width:760px;margin:0 auto;padding:20px}.article img.hero{width:100%;height:auto;border-radius:14px}
+.lede{font-size:18px;color:#b6c2cf}footer{padding:26px 20px;text-align:center;color:#8b98a5;font-size:13px;border-top:1px solid #1f2937;margin-top:30px}
+footer a{margin:0 6px}.note{background:#1a1408;border:1px solid #8a6d1a;border-radius:10px;padding:12px;font-size:14px;color:#f5d67b}
+h2{color:#fff;margin-top:28px}.article h2{color:#fff}.article h3{color:#dbe4ee}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #2a3340;padding:8px 10px;text-align:left;font-size:14px}th{background:#161b22;color:#fff}
+.badge{display:inline-block;background:#161b22;border:1px solid #2a3340;border-radius:999px;padding:4px 12px;font-size:13px;color:#9aa7b4;margin:2px}
+.capline{padding:8px 10px;border-bottom:1px solid #1f2937}.capline b{color:#00e5ff}
+</style></head>
+<body><header><a class="logo" href="../index.html">CapCut<b>Guide</b></a><nav><a href="../index.html">Home</a><a href="../index.html#articles">Guides</a><a href="../index.html#tools">Tools</a><a href="../about.html">About</a></nav></header>
+<main class="wrap"><p><a href="../index.html">Home</a> / <a href="../index.html#tools">Tools</a></p>
+<h1>Caption Timing Helper</h1>
+<p class="lede">Paste your script, set how fast you speak and how many words fit on screen, and get timed caption lines you can copy into CapCut.</p>
+<div class="card"><h2 style="margin-top:0">Build your captions</h2>
+<label>Your script<br><textarea id="script">Welcome back to the channel. Today I am going to show you three simple edits that make any video look professional. First, cut on the beat. Second, add captions that match your voice. Third, keep every clip short.</textarea></label>
+<p><label>Words per caption <input id="wpc" type="number" value="6" min="2" max="12" style="max-width:120px"></label>
+<label>Speaking speed (words per minute) <input id="wpm" type="number" value="150" min="60" max="250" step="5" style="max-width:120px"></label>
+<label>Gap between captions (seconds) <input id="gap" type="number" value="0.2" min="0" max="1" step="0.1" style="max-width:120px"></label></p>
+<p><button onclick="buildCaps()">Generate captions</button> <button class="ghost" onclick="copyCaps()">Copy all</button></p>
+<div class="result" id="summary"></div>
+<div id="capsOut"></div>
+<script>
+function fmt(t){const m=Math.floor(t/60),s=(t%60).toFixed(1).padStart(4,'0');return m+':'+s}
+function buildCaps(){const text=document.getElementById('script').value.trim();if(!text){document.getElementById('capsOut').innerHTML='<p>Please paste a script first.</p>';return}
+const wpc=+document.getElementById('wpc').value||6,wpm=+document.getElementById('wpm').value||150,gap=+document.getElementById('gap').value||0;
+const words=text.split(/\s+/);let t=0,html='',n=0;
+for(let i=0;i<words.length;i+=wpc){const chunk=words.slice(i,i+wpc),dur=chunk.length/wpm*60;t+=0;const start=t,end=t+dur;
+html+='<div class="capline"><b>'+fmt(start)+' – '+fmt(end)+'</b><br>'+chunk.join(' ')+'</div>';t=end+gap;n++}
+document.getElementById('capsOut').innerHTML=html;
+document.getElementById('summary').innerHTML='Total words: <b>'+words.length+'</b> &nbsp; Captions: <b>'+n+'</b> &nbsp; Estimated spoken length: <b>'+fmt(t)+' min</b> &nbsp; Speaking speed: <b>'+wpm+' wpm</b>'}
+function copyCaps(){const lines=[...document.querySelectorAll('#capsOut .capline')].map(d=>d.textContent.trim()).join('\n');if(!lines)return;navigator.clipboard.writeText(lines).then(()=>{const b=event.target;b.textContent='Copied!';setTimeout(()=>b.textContent='Copy all',1200)})}
+buildCaps();
+</script></div>
+<h2>How to use these timings in CapCut</h2><p>CapCut's auto captions generate timings from your audio automatically, which is usually faster than typing them by hand. This helper is for when you plan captions before recording, or when you want to check how long your script will run. A natural speaking pace is about 130–160 words per minute. Keep captions to 2–6 words per line on vertical video so the text stays big and readable, and leave a small gap between lines so each caption has time to register. In CapCut, add your captions with the Text &gt; Auto Captions tool, then adjust any line that starts too early or late by dragging its edges on the timeline.</p>
+<h2>More tools</h2><div class="grid"><a class="toolcard" href="aspect-ratio-calculator.html"><h3>Aspect Ratio Calculator</h3><p>Presets for TikTok, Reels, Shorts and YouTube. Enter one side and get the matching resolution instantly.</p></a><a class="toolcard" href="bitrate-export-size-calculator.html"><h3>Bitrate &amp; Export Size Calculator</h3><p>Work out how big your exported video will be from its length and bitrate — or the bitrate for a target size.</p></a><a class="toolcard" href="template-idea-generator.html"><h3>Template Idea Generator</h3><p>Pick a niche and a mood and get a complete edit idea: hook, style, transitions and music vibe.</p></a></div>
+</main><footer><p>Download CapCut: <a href="https://play.google.com/store/apps/details/CapCut_Video_Editor?id=com.lemon.lvoverseas&hl=en_GB" target="_blank" rel="noopener">Get it on Google Play</a> | <a href="https://apps.apple.com/pk/app/capcut-photo-video-editor/id1500855883" target="_blank" rel="noopener">Download on the App Store</a></p><p><a href="../about.html">About</a> | <a href="../contact.html">Contact</a> | <a href="../privacy.html">Privacy</a> | <a href="../disclaimer.html">Disclaimer</a></p><p>CapCut Guide — independent informational guides about the CapCut video editor. Not affiliated with ByteDance or CapCut.</p></footer></body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aspect Ratio Calculator — TikTok, Reels, Shorts &amp; YouTube | CapCut Guide</title>
+<meta name="description" content="Free aspect ratio calculator with presets for TikTok, Instagram Reels, YouTube Shorts and YouTube. Enter one side and get the matching resolution.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#0b0f14;color:#e6edf3;line-height:1.6}
+a{color:#00e5ff}header{background:#0d1117;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1f2937}
+.logo{color:#fff;font-weight:800;font-size:20px;text-decoration:none}.logo b{color:#00e5ff}nav a{color:#c9d1d9;margin:0 8px;text-decoration:none;font-size:14px}
+nav a:hover{color:#00e5ff}.wrap{max-width:1080px;margin:0 auto;padding:16px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:18px}
+.toolcard{background:#161b22;border:1px solid #2a3340;border-radius:14px;padding:16px;text-decoration:none;color:#e6edf3;display:block}
+.toolcard:hover{border-color:#00e5ff}.toolcard h3{margin:0 0 6px;color:#fff}.toolcard p{margin:0;font-size:14px;color:#9aa7b4}
+.acard{background:#161b22;border:1px solid #2a3340;border-radius:14px;overflow:hidden;text-decoration:none;color:#e6edf3;display:block}
+.acard:hover{border-color:#00e5ff}.acard img{width:100%;height:150px;object-fit:cover;display:block}.acard span{display:block;padding:12px 14px;font-weight:600;font-size:15px;color:#fff}
+.acard small{display:block;padding:0 14px 12px;color:#9aa7b4;font-size:13px;line-height:1.45}
+input,select,textarea{padding:10px;border-radius:8px;border:1px solid #3a4556;font-size:15px;margin:6px 4px 6px 0;background:#0d1117;color:#e6edf3;width:100%;max-width:420px}
+button{background:#00e5ff;color:#04222a;border:0;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin:4px 4px 4px 0}
+button.ghost{background:transparent;color:#00e5ff;border:1px solid #00e5ff}
+.result{background:#0d1117;border:1px solid #2a3340;border-radius:10px;padding:14px;margin:12px 0}
+.result b{color:#00e5ff}main.article{max-width:760px;margin:0 auto;padding:20px}.article img.hero{width:100%;height:auto;border-radius:14px}
+.lede{font-size:18px;color:#b6c2cf}footer{padding:26px 20px;text-align:center;color:#8b98a5;font-size:13px;border-top:1px solid #1f2937;margin-top:30px}
+footer a{margin:0 6px}.note{background:#1a1408;border:1px solid #8a6d1a;border-radius:10px;padding:12px;font-size:14px;color:#f5d67b}
+h2{color:#fff;margin-top:28px}.article h2{color:#fff}.article h3{color:#dbe4ee}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #2a3340;padding:8px 10px;text-align:left;font-size:14px}th{background:#161b22;color:#fff}
+.badge{display:inline-block;background:#161b22;border:1px solid #2a3340;border-radius:999px;padding:4px 12px;font-size:13px;color:#9aa7b4;margin:2px}
+.preview{border:1px solid #2a3340;border-radius:10px;background:#0d1117;padding:16px;text-align:center}
+.frame{display:inline-block;background:linear-gradient(135deg,#00e5ff,#ff2d78);border-radius:6px;transition:width .2s,height .2s}
+</style></head>
+<body><header><a class="logo" href="../index.html">CapCut<b>Guide</b></a><nav><a href="../index.html">Home</a><a href="../index.html#articles">Guides</a><a href="../index.html#tools">Tools</a><a href="../about.html">About</a></nav></header>
+<main class="wrap"><p><a href="../index.html">Home</a> / <a href="../index.html#tools">Tools</a></p>
+<h1>Aspect Ratio Calculator</h1>
+<p class="lede">Pick a platform preset or a custom ratio, enter one side, and get the matching resolution for your video.</p>
+<div class="card"><h2 style="margin-top:0">Calculate a resolution</h2>
+<label>Platform preset<br><select id="preset">
+<option value="9:16">TikTok / Instagram Reels / YouTube Shorts — 9:16 (vertical)</option>
+<option value="16:9">YouTube (landscape) — 16:9</option>
+<option value="1:1">Square post — 1:1</option>
+<option value="4:5">Instagram portrait post — 4:5</option>
+<option value="21:9">Cinematic widescreen — 21:9</option>
+<option value="custom">Custom ratio</option>
+</select></label><br>
+<label>Custom ratio (width : height) <input id="customRatio" value="3:2" style="max-width:120px" disabled></label>
+<p><label>Width (px) <input id="wIn" type="number" value="1080" min="1" style="max-width:160px"></label>
+<label>Height (px) <input id="hIn" type="number" value="1920" min="1" style="max-width:160px"></label></p>
+<p><button onclick="calcFromW()">Calculate from width</button><button class="ghost" onclick="calcFromH()">Calculate from height</button></p>
+<div class="result" id="out"></div>
+<div class="preview"><div class="frame" id="frame" style="width:108px;height:192px"></div><p id="frameLabel" style="color:#9aa7b4;font-size:13px">1080 × 1920 — 9:16</p></div>
+<h3>Common resolutions for this ratio</h3><div id="common"></div>
+<script>
+function ratio(){const p=document.getElementById('preset').value;if(p==='custom'){const m=document.getElementById('customRatio').value.trim().match(/^(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)$/);if(!m)return null;return{rw:+m[1],rh:+m[2],label:m[1]+':'+m[2]}}const a=p.split(':');return{rw:+a[0],rh:+a[1],label:p}}
+function show(w,h,r){const out=document.getElementById('out');out.innerHTML='Resolution: <b>'+w+' × '+h+' px</b><br>Aspect ratio: <b>'+r.label+'</b><br>Total pixels: <b>'+(w*h).toLocaleString()+'</b>';
+const fw=Math.min(220,Math.round(220*r.rw/Math.max(r.rw,r.rh))),fh=Math.min(220,Math.round(220*r.rh/Math.max(r.rw,r.rh)));
+const f=document.getElementById('frame');f.style.width=Math.max(fw,24)+'px';f.style.height=Math.max(fh,24)+'px';
+document.getElementById('frameLabel').textContent=w+' × '+h+' — '+r.label;
+const sizes=[[240,360,480,720,1080,1440,2160],[270,360,480,540,720,1080,1440,2160]];
+let list=[];const base=r.rw>=r.rh?[1080,720,480,2160,1440]:[1080,1920,720,1280,2160,3840];
+base.forEach(s=>{const w2=r.rw>=r.rh?s:Math.round(s*r.rw/r.rh),h2=r.rw>=r.rh?Math.round(s*r.rh/r.rw):s;list.push(w2+' × '+h2)});
+document.getElementById('common').innerHTML=list.map(s=>'<span class="badge">'+s+'</span>').join('')}
+function calcFromW(){const r=ratio();if(!r){document.getElementById('out').textContent='Enter a valid custom ratio like 3:2.';return}const w=+document.getElementById('wIn').value;if(!w||w<1)return;const h=Math.round(w*r.rh/r.rw);document.getElementById('hIn').value=h;show(w,h,r)}
+function calcFromH(){const r=ratio();if(!r){document.getElementById('out').textContent='Enter a valid custom ratio like 3:2.';return}const h=+document.getElementById('hIn').value;if(!h||h<1)return;const w=Math.round(h*r.rw/r.rh);document.getElementById('wIn').value=w;show(w,h,r)}
+document.getElementById('preset').addEventListener('change',e=>{document.getElementById('customRatio').disabled=e.target.value!=='custom';calcFromW()});
+document.getElementById('customRatio').addEventListener('input',calcFromW);
+calcFromW();
+</script></div>
+<h2>Why aspect ratio matters</h2><p>Every platform crops or letterboxes video that does not match its preferred ratio. A 16:9 landscape clip uploaded to TikTok gets shrunk into a small strip with black bars, while a 9:16 vertical clip on YouTube looks fine as a Short but awkward in a normal video player. Choosing the ratio before you start editing saves you from re-framing every shot later. In CapCut, set your canvas ratio first (in the project settings), then place your clips — text and faces should stay inside the safe zone, roughly the middle 80% of the frame, so platform buttons and captions never cover them.</p>
+<h2>More tools</h2><div class="grid"><a class="toolcard" href="bitrate-export-size-calculator.html"><h3>Bitrate &amp; Export Size Calculator</h3><p>Work out how big your exported video will be from its length and bitrate — or the bitrate for a target size.</p></a><a class="toolcard" href="caption-timing-helper.html"><h3>Caption Timing Helper</h3><p>Paste your script and split it into timed caption lines with start and end timestamps, ready to use.</p></a><a class="toolcard" href="template-idea-generator.html"><h3>Template Idea Generator</h3><p>Pick a niche and a mood and get a complete edit idea: hook, style, transitions and music vibe.</p></a></div>
+</main><footer><p>Download CapCut: <a href="https://play.google.com/store/apps/details/CapCut_Video_Editor?id=com.lemon.lvoverseas&hl=en_GB" target="_blank" rel="noopener">Get it on Google Play</a> | <a href="https://apps.apple.com/pk/app/capcut-photo-video-editor/id1500855883" target="_blank" rel="noopener">Download on the App Store</a></p><p><a href="../about.html">About</a> | <a href="../contact.html">Contact</a> | <a href="../privacy.html">Privacy</a> | <a href="../disclaimer.html">Disclaimer</a></p><p>CapCut Guide — independent informational guides about the CapCut video editor. Not affiliated with ByteDance or CapCut.</p></footer></body></html>
